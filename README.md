@@ -79,7 +79,9 @@ D:\Workspace\Playwrightfundamentals\
 │
 ├── tests/
 │   ├── example.spec.ts              ← Sample tests from Playwright getting-started
-│   └── tta-check.spec.ts            ← Login test for The Testing Academy app
+│   ├── tta-check.spec.ts            ← Login test for The Testing Academy app
+│   ├── normal_pw.ts                 ← Plain TS script using Playwright Engine directly (no test runner)
+│   └── multiple_context.ts          ← Demo of multiple browser contexts (admin + viewer)
 │
 ├── Notes/
 │   └── playwrightenginevsTestrunner.md  ← Deep dive: Engine vs Test Runner
@@ -134,7 +136,7 @@ Key settings in [playwright.config.ts](playwright.config.ts):
 | `reporter` | `html` | Generate HTML report |
 | `headless` | `false` | Run with visible browser window |
 | `trace` | `on-first-retry` | Capture trace on first retry |
-| `projects` | `chromium` only | Currently configured for Desktop Chrome |
+| `projects` | `chromium` with Chrome channel | Chrome browser via installed Google Chrome |
 
 Other browsers (Firefox, WebKit, Mobile, Edge) are commented out and can be enabled as needed.
 
@@ -183,6 +185,17 @@ npx playwright test --headed
 npx playwright test --debug
 ```
 
+## Running Plain TypeScript Scripts
+
+Files like `tests/normal_pw.ts` and `tests/multiple_context.ts` use the **Playwright Engine directly** (not the Test Runner). Run them with `tsx`:
+
+```bash
+npx tsx tests/normal_pw.ts
+npx tsx tests/multiple_context.ts
+```
+
+> `tsx` compiles and runs TypeScript in one step without creating `.js` files. It's the recommended way to run standalone Playwright scripts.
+
 ---
 
 ## Viewing Reports
@@ -216,6 +229,8 @@ The report is also auto-published to **GitHub Pages** on push:
 - ✅ Test fixtures (`page`, `context`, `browser`)
 - ✅ HTML reporting and trace viewer
 - ✅ Playwright Engine vs Test Runner architecture
+- ✅ Standalone Playwright scripts (Engine-only, no Test Runner)
+- ✅ Multiple browser contexts for multi-user scenarios
 
 ---
 
